@@ -6,12 +6,17 @@ public class Hacker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        ShowMainMenu();
+        ShowMainMenu("Hello user!");
 	}
 	
-    void ShowMainMenu () {
+    void ShowMainMenu (string greeting = "") {
         // Clear the screen for the welcome text
         Terminal.ClearScreen();
+
+        // Terminal greets user if variable isn't null
+        if(greeting != "") {
+            Terminal.WriteLine(greeting);
+        }
 
         Terminal.WriteLine("Welcome to the Hacker game.");
         Terminal.WriteLine("Choose your difficult.");
