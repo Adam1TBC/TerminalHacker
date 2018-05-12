@@ -101,7 +101,6 @@ public class Hacker : MonoBehaviour {
         if (input.ToLower() == password)
         {
             Terminal.WriteLine("WELL DONE!");
-            ShowMainMenu();
         }
         else
         {
