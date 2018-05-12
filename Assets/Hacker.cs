@@ -44,6 +44,11 @@ public class Hacker : MonoBehaviour {
         {
             ShowMainMenu();
         }
+        // If a player wants to clear the game screen
+        else if (input.ToLower() == "clear")
+        {
+            Terminal.ClearScreen();
+        }
         else if (currentScreen == Screen.MainMenu)
         {
             RunMainMenu(input);
