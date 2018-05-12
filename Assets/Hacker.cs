@@ -8,12 +8,16 @@ public class Hacker : MonoBehaviour {
     // Game state
     int level;
 
+    enum Screen { MainMenu, Password, Win };
+    Screen currentScreen;
+
 	// Use this for initialization
 	void Start () {
         ShowMainMenu("Hello user!");
 	}
 	
     void ShowMainMenu (string greeting = "") {
+        currentScreen = Screen.MainMenu;
         // Clear the screen for the welcome text
         Terminal.ClearScreen();
 
@@ -22,12 +26,9 @@ public class Hacker : MonoBehaviour {
             Terminal.WriteLine(greeting);
         }
 
-        Terminal.WriteLine("Welcome to the Hacker game.");
         Terminal.WriteLine("Choose your target.");
-        // For the empty line
-        Terminal.WriteLine(" ");
-
         Terminal.WriteLine("1. Easy. You'll hack a library");
+        //Empty line
         Terminal.WriteLine(" ");
 
         Terminal.WriteLine("2. Medium. You'll hack a police station");
@@ -35,7 +36,20 @@ public class Hacker : MonoBehaviour {
     }
 
 
-    void OnUserInput(string input) {
+    void OnUserInput(string input)
+    {
+        if (input.ToLower() == "menu")
+        {
+            ShowMainMenu();
+        }
+        else if (currentScreen == Screen.MainMenu)
+        {
+            RunMainMenu(input);
+        }
+    }
+
+    void RunMainMenu(string input)
+    {
         switch (input.ToLower())
         {
             case "1":
@@ -49,9 +63,6 @@ public class Hacker : MonoBehaviour {
             case "3":
                 level = 3;
                 StartGame();
-                break;
-            case "menu":
-                ShowMainMenu();
                 break;
             //Ester eggs
             case "telegram":
@@ -67,6 +78,7 @@ public class Hacker : MonoBehaviour {
     }
 
     void StartGame() {
+        currentScreen = Screen.Password;
         Terminal.WriteLine("You have chosen level " + level);
     }
 
