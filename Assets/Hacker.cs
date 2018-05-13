@@ -8,6 +8,7 @@ public class Hacker : MonoBehaviour {
     string[] level3Passwords = { "goverment", "nuclear", "danger", "experiment", "zombie" };
 
     // Game state
+    int level;
     string password;
 
     enum Screen { MainMenu, Password, Win };
@@ -65,14 +66,17 @@ public class Hacker : MonoBehaviour {
         {
             // Means the level
             case "1":
+                level = 1;
                 password = level1Passwords[Random.Range(0, level1Passwords.Length)];
                 StartGame();
                 break;
             case "2":
+                level = 2;
                 password = level2Passwords[Random.Range(0, level2Passwords.Length)];
                 StartGame();
                 break;
             case "3":
+                level = 3;
                 password = level3Passwords[Random.Range(0, level3Passwords.Length)];
                 StartGame();
                 break;
@@ -108,4 +112,43 @@ public class Hacker : MonoBehaviour {
             Terminal.WriteLine("Sorry, wrong password");
         }
 	}
+
+    void DisplayWinScreen()
+    {
+        currentScreen = Screen.Win;
+        Terminal.ClearScreen();
+
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("You won! Have a book...");
+                Terminal.WriteLine(@"
+    _______
+   /      //
+  /      //
+ /_____ //
+(______(/           
+"
+                );
+                Terminal.WriteLine("To select another level write down 'menu'");
+                break;
+            case 2:
+                Terminal.WriteLine("You won!! Take a prison key");
+                Terminal.WriteLine(@"
+ __
+/0 \_______
+\__/-=' = '         
+"
+                );
+                Terminal.WriteLine("To play again write down 'menu'");
+                break;
+            case 3:
+                Terminal.WriteLine("You won!!! You're the best hacker in the whole world");
+                Terminal.WriteLine("To select another level write down 'menu'");
+                break;
+            default:
+                print("Invalid level");
+                break;
+        }
+    }
 }
