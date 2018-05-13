@@ -103,14 +103,31 @@ public class Hacker : MonoBehaviour {
     }
 
     void CheckPassword (string input) {
-        if (input.ToLower() == password)
+        input = input.ToLower();
+
+        if (input == password)
         {
-            Terminal.WriteLine("WELL DONE!");
+            DisplayWinScreen();
         }
         else
         {
-            Terminal.WriteLine("Sorry, wrong password");
-        }
+            // Counting coincidences chars
+            int numberOfCoincidences = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                char x = password[i];
+                foreach (char a in input)
+                {
+                    if (a == x)
+                    {
+                        numberOfCoincidences++;
+                        break;
+                    }
+                }
+            }
+            Terminal.WriteLine("Invalid password.");
+            Terminal.WriteLine("Number of the unique coincidences: " + numberOfCoincidences);
+        }  
 	}
 
     void DisplayWinScreen()
