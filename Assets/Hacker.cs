@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hacker : MonoBehaviour {
 
+    // Game configuration data
+    string[] level1Passwords = { "book", "self", "password", "borrow", "font" };
+    string[] level2Passwords = { "weapon", "donut", "radio", "arrest", "prisoner" };
+    string[] level3Passwords = { "goverment", "nuclear", "danger", "experiment", "zombie" };
+
     // Game state
-    int level;
     string password;
 
     enum Screen { MainMenu, Password, Win };
@@ -38,8 +39,7 @@ public class Hacker : MonoBehaviour {
     }
 
 
-    void OnUserInput(string input)
-    {
+    void OnUserInput(string input) {
         if (input.ToLower() == "menu")
         {
             ShowMainMenu();
@@ -65,18 +65,15 @@ public class Hacker : MonoBehaviour {
         {
             // Means the level
             case "1":
-                level = 1;
-                password = "book";
+                password = level1Passwords[Random.Range(0, level1Passwords.Length)];
                 StartGame();
                 break;
             case "2":
-                level = 2;
-                password = "weapon";
+                password = level2Passwords[Random.Range(0, level2Passwords.Length)];
                 StartGame();
                 break;
             case "3":
-                level = 3;
-                password = "goverment";
+                password = level3Passwords[Random.Range(0, level3Passwords.Length)];
                 StartGame();
                 break;
             //Ester eggs
@@ -86,6 +83,9 @@ public class Hacker : MonoBehaviour {
             case "ukraine":
                 Terminal.WriteLine("The Europe");
                 break;
+            case "internet":
+                Terminal.WriteLine("I'm sorry RKN but already have done it");
+                break;
             default:
                 Terminal.WriteLine("Please, choose a valid level");
                 break;
@@ -94,7 +94,8 @@ public class Hacker : MonoBehaviour {
 
     void StartGame() {
         currentScreen = Screen.Password;
-        Terminal.WriteLine("You have chosen level " + level);
+        Terminal.ClearScreen();
+        Terminal.WriteLine("Please enter you password: ");
     }
 
     void CheckPassword (string input) {
