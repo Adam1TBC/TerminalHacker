@@ -3,8 +3,8 @@
 public class Hacker : MonoBehaviour {
 
     // Game configuration data
-    string[] level1Passwords = { "book", "self", "password", "borrow", "font" };
-    string[] level2Passwords = { "weapon", "donut", "radio", "arrest", "prisoner" };
+    string[] level1Passwords = { "book", "shelf", "borrow", "font", "page" };
+    string[] level2Passwords = { "weapon", "donut", "radio", "arrest", "prison" };
     string[] level3Passwords = { "goverment", "nuclear", "danger", "experiment", "zombie" };
 
     // Game state
@@ -100,6 +100,9 @@ public class Hacker : MonoBehaviour {
         currentScreen = Screen.Password;
         Terminal.ClearScreen();
         Terminal.WriteLine("Please enter you password: ");
+        Terminal.WriteLine("If you want to play another level write down 'menu'");
+        Terminal.WriteLine("Length: " + password.Length);
+        Terminal.WriteLine("First letter: " + password[0] + " Last: " + password[password.Length - 1]);
     }
 
     void CheckPassword (string input) {
@@ -147,7 +150,6 @@ public class Hacker : MonoBehaviour {
 (______(/           
 "
                 );
-                Terminal.WriteLine("To select another level write down 'menu'");
                 break;
             case 2:
                 Terminal.WriteLine("You won!! Take a prison key");
@@ -157,15 +159,15 @@ public class Hacker : MonoBehaviour {
 \__/-=' = '         
 "
                 );
-                Terminal.WriteLine("To play again write down 'menu'");
                 break;
             case 3:
                 Terminal.WriteLine("You won!!! You're the best hacker in the whole world");
-                Terminal.WriteLine("To select another level write down 'menu'");
                 break;
             default:
                 print("Invalid level");
                 break;
         }
+
+        Terminal.WriteLine("To select another level write down 'menu'");
     }
 }
